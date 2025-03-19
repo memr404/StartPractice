@@ -7,9 +7,13 @@
 		"ios": "2.2074"
 	},
 	"id": "memr404.startpractice",
-	"name": "StartPractice",
-	"version": "v0.1.0",
+	"name": "Start Practice Button",
+	"version": "v0.2.0",
 	"developer": "memr404",
 	"description": "This mod adds a new button before the start of the level to start practice.",
-	"entry": "bin/mymod.geode"
+	"entry": "bin/mymod.geode",
+	"tags": ["interface", "offline"],
+	"links": {
+		"source": "https://github.com/memr404/StartPractice"
+	}
 }
