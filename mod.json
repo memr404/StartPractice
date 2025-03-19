@@ -8,7 +8,7 @@
 	},
 	"id": "memr404.startpractice",
 	"name": "Start Practice Button",
-	"version": "v0.2.0",
+	"version": "v0.2.1",
 	"developer": "memr404",
 	"description": "This mod adds a new button before the start of the level to start practice.",
 	"entry": "bin/mymod.geode",
