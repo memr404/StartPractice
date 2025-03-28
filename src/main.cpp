@@ -34,6 +34,7 @@ class $modify(MyButtonInfoLayer, LevelInfoLayer) {
 
 	void togglePractice(CCObject* target) {
 		this->onPlay(target);
+		practice = true;
 	}
 };
 
