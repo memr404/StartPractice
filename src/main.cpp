@@ -24,7 +24,7 @@ class $modify(MyButtonInfoLayer, LevelInfoLayer) {
 			menu->addChild(practiceBtn);
 		} else if (leftMenu) {
 			leftMenu->addChild(practiceBtn);
-			leftMenu
+			leftMenu->updateLayout();
 		} else return true;
 
 		practiceBtn->setID("practice-mode-button"_spr);
