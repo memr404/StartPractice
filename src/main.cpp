@@ -21,7 +21,7 @@ class $modify(MyButtonInfoLayer, LevelInfoLayer) {
         	playBtn->setPosition(playBtn->getPosition() - ccp(20, 0));
 			practiceBtn->setPosition(playBtn->getPosition() + ccp(67, 0));
 			practiceBtn->setScale(0.7f);
-			menu->addChild(practiceBtn);
+			playMenu->addChild(practiceBtn);
 		} else if (auto leftMenu = this->getChildByID("left-side-menu")) {
 			leftMenu->addChild(practiceBtn);
 			leftMenu->updateLayout();
