@@ -15,14 +15,14 @@ class $modify(MyButtonInfoLayer, LevelInfoLayer) {
         auto practiceSprite = CCSprite::createWithSpriteFrameName("GJ_practiceBtn_001.png");
         auto practiceBtn = CCMenuItemSpriteExtra::create(practiceSprite, this, menu_selector(MyButtonInfoLayer::togglePractice));
 		
+		auto playMenu = this->getChildByID("play-menu");
 		auto playBtn = static_cast<CCMenuItemSpriteExtra*>(this->querySelector("play-menu > play-button"));
-		auto leftMenu = this->getChildByID("left-side-menu");
-        if (!Mod::get()->getSettingValue<bool>("use-left-menu") && playBtn) {
+        if (!Mod::get()->getSettingValue<bool>("use-left-menu") && playBtn && playMenu) {
         	playBtn->setPosition(playBtn->getPosition() - ccp(20, 0));
 			practiceBtn->setPosition(playBtn->getPosition() + ccp(67, 0));
 			practiceBtn->setScale(0.7f);
 			menu->addChild(practiceBtn);
-		} else if (leftMenu) {
+		} else if (auto leftMenu = this->getChildByID("left-side-menu")) {
 			leftMenu->addChild(practiceBtn);
 			leftMenu->updateLayout();
 		} else return true;
