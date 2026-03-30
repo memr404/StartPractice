@@ -1,3 +1,5 @@
+# v0.2.3
+- Update to Geode v5.4.1
 # v0.2.2
 - Rewrite everything
 - Crossplatform support
