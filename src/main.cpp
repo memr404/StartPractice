@@ -1,61 +1,50 @@
-#include <Geode/Geode.hpp>
+#include <Geode/modify/LevelInfoLayer.hpp>
+#include <Geode/modify/PlayLayer.hpp>
 
 using namespace geode::prelude;
 
-#include <Geode/modify/LevelInfoLayer.hpp>
-#include <Geode/binding/CCMenuItemSpriteExtra.hpp>
-#include <Geode/cocos/sprite_nodes/CCSprite.h>
-#include <Geode/modify/PlayLayer.hpp>
+bool practice = false;
 
 class $modify(MyButtonInfoLayer, LevelInfoLayer) {
-	static int practice;
 
     bool init(GJGameLevel* level, bool p1){
-		if (!LevelInfoLayer::init(level, p1)) {
-			return false;
-		}
+		if (!LevelInfoLayer::init(level, p1)) return false;
 
-		auto menu = this->getChildByID("play-menu");
-        if (!menu) {
-			return true;
-		}
-		practice = 0;
+		practice = false;
 
         auto practiceSprite = CCSprite::createWithSpriteFrameName("GJ_practiceBtn_001.png");
         auto practiceBtn = CCMenuItemSpriteExtra::create(practiceSprite, this, menu_selector(MyButtonInfoLayer::togglePractice));
+		
+		auto playMenu = this->getChildByID("play-menu");
+		auto playBtn = static_cast<CCMenuItemSpriteExtra*>(this->querySelector("play-menu > play-button"));
+        if (!Mod::get()->getSettingValue<bool>("use-left-menu") && playBtn && playMenu) {
+        	playBtn->setPosition(playBtn->getPosition() - ccp(20, 0));
+			practiceBtn->setPosition(playBtn->getPosition() + ccp(67, 0));
+			practiceBtn->setScale(0.7f);
+			playMenu->addChild(practiceBtn);
+		} else if (auto leftMenu = this->getChildByID("left-side-menu")) {
+			leftMenu->addChild(practiceBtn);
+			leftMenu->updateLayout();
+		} else return true;
 
-        auto playBtn = static_cast<CCMenuItemSpriteExtra*>(menu->getChildByID("play-button"));
-        if (playBtn) {
-			playBtn->setPosition(playBtn->getPosition() - ccp(20, 0));
-            practiceBtn->setPosition(playBtn->getPosition() + ccp(67, 0));
-			practiceBtn->setScale(0.7f); 
-        }
-		menu->addChild(practiceBtn);
+		practiceBtn->setID("practice-mode-button"_spr);
+
         return true;
 	}
 
 	void togglePractice(CCObject* target) {
-		practice = 1;
 		this->onPlay(target);
-	}
-
-	static int getPractice() {
-		return practice;
+		practice = true;
 	}
 };
 
-class $modify (AutoPractice, PlayLayer)
-{
-    bool init(GJGameLevel* level, bool useReplay, bool dontCreateObjects)
-    {
-        if (!PlayLayer::init(level, useReplay, dontCreateObjects))
-            return false;
-
-		auto practice = MyButtonInfoLayer::getPractice();
-
-        this->togglePracticeMode(practice);
-        return true;
-    }
+class $modify(AutoPractice, PlayLayer) {
+    void setupHasCompleted() {
+		PlayLayer::setupHasCompleted();
+		if (practice) this->togglePracticeMode(true);
+	}
+	void onQuit() {
+		PlayLayer::onQuit();
+		practice = false;
+	}
 };
-
-int MyButtonInfoLayer::practice = 0;

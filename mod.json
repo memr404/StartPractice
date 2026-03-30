@@ -2,18 +2,26 @@
 	"geode": "4.3.1",
 	"gd": {
 		"win": "2.2074",
-		"android": "2.2074",
 		"mac": "2.2074",
-		"ios": "2.2074"
+		"android": "2.2074"
 	},
 	"id": "memr404.startpractice",
 	"name": "Start Practice Button",
-	"version": "v0.2.1",
+	"version": "v0.2.2",
 	"developer": "memr404",
 	"description": "This mod adds a new button before the start of the level to start practice.",
-	"entry": "bin/mymod.geode",
 	"tags": ["interface", "offline"],
+	"dependencies": {
+		"geode.node-ids": ">=1.16.0"
+	},
 	"links": {
 		"source": "https://github.com/memr404/StartPractice"
+	},
+	"settings": {
+		"use-left-menu": {
+			"name": "Place Button in Left Menu",
+			"type": "bool",
+			"default": true
+		}
 	}
 }
