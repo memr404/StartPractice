@@ -7,7 +7,7 @@
 	},
 	"id": "memr404.startpractice",
 	"name": "Start Practice Button",
-	"version": "v0.2.3",
+	"version": "v0.2.4",
 	"developer": "memr404",
 	"description": "This mod adds a new button before the start of the level to start practice.",
 	"tags": ["interface", "offline"],
