@@ -7,21 +7,18 @@
 	},
 	"id": "memr404.startpractice",
 	"name": "Start Practice Button",
-	"version": "v0.2.4",
+	"version": "v0.3.0",
 	"developer": "memr404",
 	"description": "This mod adds a new button before the start of the level to start practice.",
 	"tags": ["interface", "offline"],
-	"dependencies": {
-		"geode.node-ids": ">=1.16.0"
-	},
 	"links": {
 		"source": "https://github.com/memr404/StartPractice"
 	},
 	"settings": {
-		"use-left-menu": {
-			"name": "Place Button in Left Menu",
+		"use-menu-buttons": {
+			"name": "Place Button in Menu with Buttons",
 			"type": "bool",
-			"default": true
+			"default": false
 		}
 	}
 }
