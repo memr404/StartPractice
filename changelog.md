@@ -1,3 +1,6 @@
+# v0.3.1
+- Fix dependencies
+
 # v0.3.0
 - Add button to EditLevelLayer
 
