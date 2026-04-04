@@ -13,11 +13,21 @@ class $modify(PracticeButtonInfoLayer, LevelInfoLayer) {
 
 		practice = false;
 
-        auto practiceSprite = CCSprite::createWithSpriteFrameName("GJ_practiceBtn_001.png");
-        auto practiceBtn = CCMenuItemSpriteExtra::create(practiceSprite, this, menu_selector(PracticeButtonInfoLayer::togglePractice));
-		
 		auto playMenu = this->getChildByID("play-menu");
 		auto playBtn = static_cast<CCMenuItemSpriteExtra*>(this->querySelector("play-menu > play-button"));
+		auto practiceSprite = CCSprite::createWithSpriteFrameName("GJ_practiceBtn_001.png");
+		auto practiceBtn = CCMenuItemSpriteExtra::create(practiceSprite, this, menu_selector(PracticeButtonInfoLayer::togglePractice));
+
+		if (Mod::get()->getSettingValue<bool>("show-only-practice") && not(Mod::get()->getSettingValue<bool>("use-menu-buttons"))){
+			practiceBtn->setPosition(playBtn->getPosition());
+			playMenu->addChild(practiceBtn);
+
+			playBtn->setVisible(false);
+			playBtn->setEnabled(false);
+
+			return true;
+		}
+
         if (!Mod::get()->getSettingValue<bool>("use-menu-buttons") && playBtn && playMenu) {
         	playBtn->setPosition(playBtn->getPosition() - ccp(20, 0));
 			practiceBtn->setPosition(playBtn->getPosition() + ccp(67, 0));
@@ -34,8 +44,8 @@ class $modify(PracticeButtonInfoLayer, LevelInfoLayer) {
 	}
 
 	void togglePractice(CCObject* target) {
-		this->onPlay(target);
 		practice = true;
+		this->onPlay(target);
 	}
 };
 
@@ -52,6 +62,17 @@ class $modify(PracticeButtonEditLayer, EditLevelLayer) {
 		
 		auto playMenu = this->getChildByID("level-edit-menu");
 		auto playBtn = static_cast<CCMenuItemSpriteExtra*>(this->querySelector("level-edit-menu > play-button"));
+
+		if (Mod::get()->getSettingValue<bool>("show-only-practice-on-editor") && not(Mod::get()->getSettingValue<bool>("use-menu-buttons"))){
+			practiceBtn->setPosition(playBtn->getPosition());
+			playMenu->addChild(practiceBtn);
+
+			playBtn->setVisible(false);
+			playBtn->setEnabled(false);
+
+			return true;
+		}
+
         if (!Mod::get()->getSettingValue<bool>("use-menu-buttons") && playBtn && playMenu) {
 			playMenu->addChild(practiceBtn);
 			playMenu->updateLayout();
@@ -66,8 +87,8 @@ class $modify(PracticeButtonEditLayer, EditLevelLayer) {
 	}
 
 	void togglePractice(CCObject* target) {
-		this->onPlay(target);
 		practice = true;
+		this->onPlay(target);
 	}
 };
 
@@ -75,9 +96,6 @@ class $modify(AutoPractice, PlayLayer) {
     void setupHasCompleted() {
 		PlayLayer::setupHasCompleted();
 		if (practice) this->togglePracticeMode(true);
-	}
-	void onQuit() {
-		PlayLayer::onQuit();
 		practice = false;
 	}
 };

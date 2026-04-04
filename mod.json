@@ -7,7 +7,7 @@
 	},
 	"id": "memr404.startpractice",
 	"name": "Start Practice Button",
-	"version": "v0.3.1",
+	"version": "v0.4.0",
 	"developer": "memr404",
 	"description": "This mod adds a new button before the start of the level to start practice.",
 	"tags": ["interface", "offline"],
@@ -22,6 +22,18 @@
 			"name": "Place Button in Menu with Buttons",
 			"type": "bool",
 			"default": false
+		},
+		"show-only-practice": {
+			"name": "Show only the practice button",
+			"type": "bool",
+			"default": false,
+			"enable-if": "!use-menu-buttons"
+		},
+		"show-only-practice-on-editor": {
+			"name": "Show only the practice button in editor",
+			"type": "bool",
+			"default": false,
+			"enable-if": "!use-menu-buttons"
 		}
 	}
 }

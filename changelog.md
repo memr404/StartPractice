@@ -1,3 +1,8 @@
+# v0.4.0
+- New logo
+- Code optimization
+- Added settings to display only the practice button
+
 # v0.3.1
 - Fix dependencies
 
