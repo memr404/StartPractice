@@ -1,6 +1,7 @@
 #include <Geode/modify/LevelInfoLayer.hpp>
 #include <Geode/modify/PlayLayer.hpp>
 #include <Geode/modify/EditLevelLayer.hpp>
+#include <Geode/modify/EndLevelLayer.hpp>
 
 using namespace geode::prelude;
 
@@ -98,4 +99,43 @@ class $modify(AutoPractice, PlayLayer) {
 		if (practice) this->togglePracticeMode(true);
 		practice = false;
 	}
+
+	void resetLevelFromStart() {
+		PlayLayer::resetLevelFromStart();
+		if (practice) this->togglePracticeMode(true);
+		practice = false;
+	}
+};
+
+class $modify(PracticeEndLayer, EndLevelLayer) {
+    void customSetup() {
+		EndLevelLayer::customSetup();
+		
+		if (!Mod::get()->getSettingValue<bool>("show-restart-practice-button")) {
+			return;
+		}
+        
+
+        auto main = this->getChildByID("main-layer");
+        if (!main) return;
+
+        auto menu = main->getChildByID("button-menu");
+        if (!menu) return;
+
+        auto practiceSprite = CCSprite::create("resetToPractice.png"_spr);
+
+        auto practiceBtn = CCMenuItemSpriteExtra::create(practiceSprite, this, menu_selector(PracticeEndLayer::retryFullpractice));
+
+        if (!practiceBtn) return;
+
+		practiceBtn->setID("reset-practice"_spr);
+        practiceBtn->setPosition(ccp(180, -125));
+
+        menu->addChild(practiceBtn);
+    }
+
+    void retryFullpractice(CCObject* target) {
+        practice = true;
+        EndLevelLayer::onReplay(target);
+    }
 };

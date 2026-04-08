@@ -1,3 +1,7 @@
+# v0.5.0
+- Added a new button to the level completion window
+- New readme
+
 # v0.4.0
 - New logo
 - Code optimization

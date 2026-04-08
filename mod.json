@@ -7,7 +7,7 @@
 	},
 	"id": "memr404.startpractice",
 	"name": "Start Practice Button",
-	"version": "v0.4.0",
+	"version": "v0.5.0",
 	"developer": "memr404",
 	"description": "This mod adds a new button before the start of the level to start practice.",
 	"tags": ["interface", "offline"],
@@ -34,6 +34,17 @@
 			"type": "bool",
 			"default": false,
 			"enable-if": "!use-menu-buttons"
+		},
+		"show-restart-practice-button": {
+			"name": "Add a practice restart button",
+			"description":"Adds a button to the level completion menu to restart the level immediately in practice",
+			"type": "bool",
+			"default": true
 		}
-	}
+	},
+	"resources": {
+        "sprites": [
+            "resources/resetToPractice.png"
+        ]
+    }
 }
