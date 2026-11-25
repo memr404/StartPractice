@@ -1,3 +1,6 @@
+# v0.5.1
+- Update to 2.2091 and Geode v6
+
 # v0.5.0
 - Added a new button to the level completion window
 - New readme
